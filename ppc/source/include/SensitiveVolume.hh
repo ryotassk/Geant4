@@ -15,11 +15,14 @@ class G4Step;
       SensitiveVolume(G4String);
      ~SensitiveVolume();
 
+
       void Initialize(G4HCofThisEvent*);
       G4bool ProcessHits(G4Step*, G4TouchableHistory*);
       void EndOfEvent(G4HCofThisEvent*);
 private:
-    G4double sum_eDep;
+    G4double neutron_energy;
 
+
+    
 };
 #endif

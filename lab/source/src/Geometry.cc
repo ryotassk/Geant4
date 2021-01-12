@@ -68,14 +68,6 @@
    G4double a,z,density,fractionmass;
    G4int natoms,ncomponents;
 
-   //   G4Isotope* he3 = new G4Isotope(name="he3", iz=2, in=3, a=3.0160293191*g/mole);
-   //   G4Isotope* U5 = new G4Isotope("U235",iz=92,n=235,a=235.01*g/mole);
-   //   G4Isotope* U8 = new G4Isotope("U238",iz=92,n=238,a=238.03*g/mole);
-   
-   //   G4Element* U = new G4Element("enriched Uranium",symbol="U",ncomponents=2);
-   //   U->AddIsotope(U5,abundance = 90.*perCent);
-   //   U->AddIsotope(U8,abundance = 10.*perCent);
-
    G4Element* O = new G4Element("Oxygen",symbol="O",z=8.,a=16.00*g/mole);
    G4Element* Si = new G4Element("Silicon",symbol="Si",z=14.,a=28.09*g/mole);
    G4Element* Al = new G4Element("Aluminium",symbol="Al",z=13.,a=26.98*g/mole);
@@ -88,8 +80,7 @@
    G4Element* S = new G4Element("Sulfur",symbol="S",z=16.,a=32.07*g/mole);
    G4Element* Zn = new G4Element("Zinc",symbol="Zn",z=30.,a=65.39*g/mole);
    G4Element* H = new G4Element("Hydrogen",symbol="H",z=1.,a=1.01*g/mole);
-   //   G4Element* He3 = new G4Element("He3",symbol="He3",ncomponents=1);
-   //   He3->AddIsotope(he3,abundance=100.*perCent);
+
 /*
    G4Material* SiO2 =
      new G4Material("quartz",density=2.650*g/cm3,ncomponents=2);
@@ -241,30 +232,6 @@
    new G4PVPlacement(labtrans3D_LogV, "PhysVol_lab", logVol_lab, physVol_World, 
                      false,copyNum_LogV);
 
-   /*
-// Define 'PPC Detector'
-   // Define the shape of solid
-   G4double radius_PPC = 5.1*cm;
-   G4double leng_Z_PPC = 43.2*cm;
-   G4Tubs* solid_PPC = new G4Tubs("Solid_PPC", 0., radius_PPC, leng_Z_PPC, 0., 360.*deg); 
-
-   // Define logical volume
-   G4Material* materi_PPC = materi_Man->FindOrBuildMaterial("Herium3");
-   G4LogicalVolume* logVol_PPC = 
-     new G4LogicalVolume( solid_PPC, materi_PPC, "LogVol_PPC", 0, 0, 0 );
-   
-   // Placement of logical volume
-   G4double PPCpos_X_LogV = 0.0*cm;           // X-location LogV 
-   G4double PPCpos_Y_LogV = 0.0*cm;           // Y-location LogV
-   G4double PPCpos_Z_LogV = 0.0*cm;           // Z-location LogV
-   G4ThreeVector PPCthreeVect_LogV = G4ThreeVector(PPCpos_X_LogV, PPCpos_Y_LogV, PPCpos_Z_LogV);
-   G4RotationMatrix PPCrotMtrx_LogV = G4RotationMatrix();
-   G4Transform3D PPCtrans3D_LogV = G4Transform3D(PPCrotMtrx_LogV, PPCthreeVect_LogV);
-   
-//   copyNum_LogV = 3000;                // Set ID number of LogV
-   new G4PVPlacement(PPCtrans3D_LogV, "PhysVol_PPC", logVol_PPC, physVol_World, 
-                     false, copyNum_LogV);
-   */
 // Sensitive volume
     auto aSV = new SensitiveVolume("SensitiveVolume");
     logVol_lab->SetSensitiveDetector(aSV);         // Add sensitivity to the logical volume

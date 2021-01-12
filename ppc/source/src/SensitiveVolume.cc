@@ -22,48 +22,43 @@
 //------------------------------------------------------------------------------
   void SensitiveVolume::Initialize(G4HCofThisEvent*)
 {
-     sum_eDep = 0.;
+     neutron_energy = 0.;
+
 }
 //------------------------------------------------------------------------------
   void SensitiveVolume::EndOfEvent(G4HCofThisEvent*)
 {
-   G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
-   analysisManager->FillNtupleDColumn(0, sum_eDep);
-  // analysisManager->FillNtupleDColumn(1, time);
-   analysisManager->AddNtupleRow();
-/***
-   G4cout <<  " eDep = "<< G4BestUnit(sum_eDep, "Energy")
-          << " stepLength = " << G4BestUnit(sum_stepLength, "Length") 
-          <<G4endl;
-***/
+    if(neutron_energy >= 0.000000001){
+    
+        G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
+        analysisManager->FillNtupleDColumn(0, neutron_energy);
+        analysisManager->AddNtupleRow();
+    
+   }
 }
 
 //------------------------------------------------------------------------------
+
 G4bool SensitiveVolume::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 {
-
-  if(aStep->GetTrack()->GetDynamicParticle()->GetParticleDefinition()->GetParticleName()=="neutron"){
-  G4StepPoint* point1 = aStep->GetPreStepPoint();
-  if(point1->GetStepStatus()==fGeomBoundary){
-  G4double kinE = point1->GetKineticEnergy();
-
-  //  if(aStep->GetTrack()->GetDynamicParticle()->GetParticleDefinition()->GetParticleName()=="neutron"){return false;}
-  // if(preStepPoint->GetStepStatus()==PhysVol_lab);
-
-  //      G4double edep = aStep->GetTotalEnergyDeposit();
-      //      G4double stepLength = aStep->GetNumberOfEvent();
-   sum_eDep = kinE;
-      //      sum_stepLength = sum_stepLength + stepLength;
-
-  //  if(sum_eDep<kinE){
-  //   sum_eDep = kinE;
-  // }
-//   G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
-  //   analysisManager->FillNtupleDColumn(0, sum_eDep);
-  //   analysisManager->AddNtupleRow();
-  }
-  }
- return true;
+    G4double pre_kinE=0,post_kinE=0;
+    
+    if(aStep->GetTrack()->GetDynamicParticle()->GetParticleDefinition()->GetParticleName()=="neutron"){
+        G4StepPoint* point1 = aStep->GetPreStepPoint();
+        G4StepPoint* point2 = aStep->GetPostStepPoint();
+        if(point1->GetStepStatus()==fGeomBoundary){
+            pre_kinE = point1->GetKineticEnergy();
+        }
+        if(point2->GetStepStatus()==fGeomBoundary){
+            post_kinE = point2->GetKineticEnergy();
+        }
+        if(pre_kinE != post_kinE){
+            neutron_energy = pre_kinE ;
+        }
+      
+    }
+  
+    return true;
 }
 
 

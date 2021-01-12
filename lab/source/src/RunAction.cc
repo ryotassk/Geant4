@@ -19,29 +19,10 @@ RunAction::RunAction()
     
 	// creating a Ntuple for all
 
-    analysisManager-> CreateNtuple( "test",  "eDep");
-          analysisManager->CreateNtupleDColumn( "sum_eDep");
-	  //         analysisManager->CreateNtupleDColumn( "time");
-//     analysisManager->CreateNtupleDColumn( "sum_eDep_2");
-//     analysisManager->CreateNtupleDColumn( "sum_stepLength_2");
+    analysisManager-> CreateNtuple( "ES",  "energy");
+          analysisManager->CreateNtupleDColumn( "neutron_energy");
 
     analysisManager->FinishNtuple();
-
-/* no use of H1s
-    // Creating H1 histograms
-
-
-     G4int id = analysisManager->CreateH1("h1:0","sum_eDep_1", 100, 0., 5.*MeV);
-	analysisManager->SetH1Activation(id, false);
-           id = analysisManager->CreateH1("h1:1","sum_stepLength_1", 100, 0., 5.*mm);
-	analysisManager->SetH1Activation(id, false);
-           id = analysisManager->CreateH1("h1:2","sum_eDep_2", 100, 0., 5.*MeV);
-	analysisManager->SetH1Activation(id, false);
-           id = analysisManager->CreateH1("h1:3","sum_stepLength_2", 100, 0., 5.*mm);
-	analysisManager->SetH1Activation(id, false);
-*/
-
-
 
   }
 
@@ -57,7 +38,6 @@ void RunAction::BeginOfRunAction(const G4Run* /*run*/)
 
   // Open an output file
   analysisManager->OpenFile();
-    //G4cout << "File " << fileName << " Open" <<G4endl;
 }
 
 void RunAction::EndOfRunAction(const G4Run* /*run*/)

@@ -12,36 +12,17 @@ RunAction::RunAction()
     // Get analysis manager
     auto analysisManager = G4AnalysisManager::Instance();
     //G4cout << "Using " << analysisManager->GetType() << G4endl;
-        analysisManager->SetActivation(true);
+    analysisManager->SetActivation(true);
 
      analysisManager->SetVerboseLevel(1);
      analysisManager->SetFileName("");
     
 	// creating a Ntuple for all
 
-    analysisManager-> CreateNtuple( "test",  "eDep");
-          analysisManager->CreateNtupleDColumn( "sum_eDep");
-	  //          analysisManager->CreateNtupleDColumn( "time");
-//     analysisManager->CreateNtupleDColumn( "sum_eDep_2");
-//     analysisManager->CreateNtupleDColumn( "sum_stepLength_2");
+    analysisManager-> CreateNtuple( "Flux",  "Energy");
+    analysisManager->CreateNtupleDColumn( "Energy");
 
     analysisManager->FinishNtuple();
-
-/* no use of H1s
-    // Creating H1 histograms
-
-
-     G4int id = analysisManager->CreateH1("h1:0","sum_eDep_1", 100, 0., 5.*MeV);
-	analysisManager->SetH1Activation(id, false);
-           id = analysisManager->CreateH1("h1:1","sum_stepLength_1", 100, 0., 5.*mm);
-	analysisManager->SetH1Activation(id, false);
-           id = analysisManager->CreateH1("h1:2","sum_eDep_2", 100, 0., 5.*MeV);
-	analysisManager->SetH1Activation(id, false);
-           id = analysisManager->CreateH1("h1:3","sum_stepLength_2", 100, 0., 5.*mm);
-	analysisManager->SetH1Activation(id, false);
-*/
-
-
 
   }
 

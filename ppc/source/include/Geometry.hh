@@ -16,9 +16,15 @@ class G4VPhysicalVolume;
    ~Geometry();
 
     G4VPhysicalVolume* Construct();
+    G4LogicalVolume* GetScoringVolume() const { return fScoringVolume; }
 
   private:
     G4VPhysicalVolume* ConstructDetector();
+   
+    
+    
+protected:
+       G4LogicalVolume*  fScoringVolume;
 
 };
 #endif

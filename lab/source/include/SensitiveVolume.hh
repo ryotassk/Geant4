@@ -19,8 +19,7 @@ class G4Step;
       G4bool ProcessHits(G4Step*, G4TouchableHistory*);
       void EndOfEvent(G4HCofThisEvent*);
 private:
-    G4double sum_eDep;
-  //   G4double time;
+    G4double neutron_energy;
 
 };
 #endif
